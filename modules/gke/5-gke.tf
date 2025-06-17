@@ -5,6 +5,7 @@ resource "google_container_cluster" "gke-cluster" {
     network = var.network
     subnetwork = var.subnet
     
+    deletion_protection = false
 
     release_channel {
       channel = "REGULAR"
@@ -18,9 +19,6 @@ resource "google_container_cluster" "gke-cluster" {
           cidr_block   = cidr_blocks.value
         }
       }
-    }
-    node_config {
-      service_account = var.gke_service_account_email
     }
     private_cluster_config {
         enable_private_nodes    = true
